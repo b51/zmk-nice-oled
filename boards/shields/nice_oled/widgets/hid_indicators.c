@@ -14,6 +14,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include "hid_indicators.h"
+#include "fonts.h"
+#include "util.h"
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -125,6 +127,10 @@ ZMK_SUBSCRIPTION(widget_hid_indicators, zmk_hid_indicators_changed);
 
 int zmk_widget_hid_indicators_init(struct zmk_widget_hid_indicators *widget, lv_obj_t *parent) {
     widget->obj = lv_label_create(parent);
+    // Monochrome panel: the theme's default colours are invisible here, so use
+    // the same foreground/font the rest of the widgets draw with.
+    lv_obj_set_style_text_color(widget->obj, LVGL_FOREGROUND, 0);
+    lv_obj_set_style_text_font(widget->obj, &pixel_operator_mono_16, 0);
 
     sys_slist_append(&widgets, &widget->node);
 
