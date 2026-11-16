@@ -95,6 +95,10 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_NICE_OLED_WIDGET_STATUS)
       # target_sources_ifdef(CONFIG_NICE_OLED_WIDGET_STATIC_IMAGE_PERIPHERAL_VIM app PRIVATE assets/vim.c)
       target_sources_ifdef(CONFIG_NICE_OLED_WIDGET_STATIC_IMAGE_PERIPHERAL_VIP_MARCOS app PRIVATE assets/vip_marcos.c)
       target_sources_ifdef(CONFIG_NICE_OLED_WIDGET_ANIMATION_PERIPHERAL_POKEMON app PRIVATE assets/pokemon.c)
+      # HID (LED) indicators: the state reaches peripherals through the split
+      # relay (CONFIG_ZMK_SPLIT_PERIPHERAL_HID_INDICATORS), so the widget works
+      # on the peripheral screen too.
+      target_sources_ifdef(CONFIG_NICE_OLED_WIDGET_HID_INDICATORS app PRIVATE widgets/hid_indicators.c)
       zephyr_library_sources(widgets/animation.c)
       zephyr_library_sources(widgets/screen_peripheral.c)
     endif()

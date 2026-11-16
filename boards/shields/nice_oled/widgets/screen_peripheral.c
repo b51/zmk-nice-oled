@@ -15,6 +15,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #include "animation.h"
 #include "battery.h"
+#include "hid_indicators.h"
 #include "output.h"
 #include "screen_peripheral.h"
 
@@ -28,6 +29,10 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
     IS_ENABLED(CONFIG_NICE_OLED_SHOW_SLEEP_ART_ON_SLEEP)
 #include "sleep_status.h"
 static struct zmk_widget_sleep_status sleep_status_widget;
+#endif
+
+#if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_HID_INDICATORS)
+static struct zmk_widget_hid_indicators hid_indicators_widget;
 #endif
 
 /**
@@ -153,6 +158,13 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
 #endif
     widget_battery_status_init();
     widget_peripheral_status_init();
+
+#if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_HID_INDICATORS)
+    zmk_widget_hid_indicators_init(&hid_indicators_widget, canvas);
+    lv_obj_align(zmk_widget_hid_indicators_obj(&hid_indicators_widget), LV_ALIGN_TOP_LEFT,
+                 CONFIG_NICE_OLED_WIDGET_HID_INDICATORS_CUSTOM_X,
+                 CONFIG_NICE_OLED_WIDGET_HID_INDICATORS_CUSTOM_Y);
+#endif
 
 #if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_ANIMATION_PERIPHERAL_WPM)
     zmk_widget_luna_init(&luna_widget, canvas);
