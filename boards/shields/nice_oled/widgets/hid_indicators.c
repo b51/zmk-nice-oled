@@ -14,8 +14,11 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include "hid_indicators.h"
-#include <fonts.h>
 #include "util.h"
+
+// This file is compiled into the app target (no shield include dirs), so declare
+// the font directly instead of including <fonts.h>.
+LV_FONT_DECLARE(pixel_operator_mono_16);
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
