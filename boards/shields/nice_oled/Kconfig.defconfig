@@ -1,4 +1,53 @@
 if SHIELD_NICE_OLED || SHIELD_NICE_EPAPER || SHIELD_NICE_CUSTOM
+
+# HID indicators also work on split peripherals: the state is relayed from the
+# central (CONFIG_ZMK_SPLIT_PERIPHERAL_HID_INDICATORS), so not central-only.
+### NICE OLED WIDGET HID INDICATORS {{{
+config NICE_OLED_WIDGET_HID_INDICATORS
+    bool "Enable HID indicators"
+    default y
+
+if NICE_OLED_WIDGET_HID_INDICATORS
+
+config ZMK_HID_INDICATORS
+    bool "Enable HID indicators"
+    default y
+
+config NICE_OLED_WIDGET_HID_INDICATORS_LUNA
+    bool "Enable HID indicators luna"
+    default n
+
+if NICE_OLED_WIDGET_HID_INDICATORS_LUNA
+
+config NICE_OLED_WIDGET_HID_INDICATORS_LUNA_ONLY_CAPSLOCK
+    bool "Enable HID indicators luna only on CapsLock"
+    default y
+
+config NICE_OLED_WIDGET_HID_INDICATORS_LUNA_ANIMATION_MS
+    int "Luna Animation in ms for HID Indicators"
+    default 300
+
+endif # NICE_OLED_WIDGET_HID_INDICATORS_LUNA
+
+
+config NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT
+    bool "Enable HID indicators bongo cat"
+    default n
+
+if NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT
+
+config NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT_ONLY_CAPSLOCK
+    bool "Enable HID indicators bongo cat only on CapsLock"
+    default y
+
+config NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT_ANIMATION_MS
+    int "Luna Animation in ms for HID Indicators bongo cat"
+    default 300
+
+endif # NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT
+
+endif # NICE_OLED_WIDGET_HID_INDICATORS }}}
+
 ### GENERAL CONFIG START {{{
 config NICE_CUSTOM_ON
     bool "Enable nice custom widget compatibility"
@@ -269,51 +318,6 @@ endif # NICE_OLED_WIDGET_RESPONSIVE_BONGO_CAT }}}
 endif
 
 ##}}}
-### NICE OLED WIDGET HID INDICATORS {{{
-config NICE_OLED_WIDGET_HID_INDICATORS
-    bool "Enable HID indicators"
-    default y
-
-if NICE_OLED_WIDGET_HID_INDICATORS
-
-config ZMK_HID_INDICATORS
-    bool "Enable HID indicators"
-    default y
-
-config NICE_OLED_WIDGET_HID_INDICATORS_LUNA
-    bool "Enable HID indicators luna"
-    default n
-
-if NICE_OLED_WIDGET_HID_INDICATORS_LUNA
-
-config NICE_OLED_WIDGET_HID_INDICATORS_LUNA_ONLY_CAPSLOCK
-    bool "Enable HID indicators luna only on CapsLock"
-    default y
-
-config NICE_OLED_WIDGET_HID_INDICATORS_LUNA_ANIMATION_MS
-    int "Luna Animation in ms for HID Indicators"
-    default 300
-
-endif # NICE_OLED_WIDGET_HID_INDICATORS_LUNA
-
-
-config NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT
-    bool "Enable HID indicators bongo cat"
-    default n
-
-if NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT
-
-config NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT_ONLY_CAPSLOCK
-    bool "Enable HID indicators bongo cat only on CapsLock"
-    default y
-
-config NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT_ANIMATION_MS
-    int "Luna Animation in ms for HID Indicators bongo cat"
-    default 300
-
-endif # NICE_OLED_WIDGET_HID_INDICATORS_BONGO_CAT
-
-endif # NICE_OLED_WIDGET_HID_INDICATORS }}}
 ### NICE OLED WIDGET RAW HID {{{
 # CONFIG_NICE_OLED_WIDGET_RAW_HID
 # CONFIG_RAW_HID
