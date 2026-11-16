@@ -14,7 +14,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/event_manager.h>
 #include <zmk/events/hid_indicators_changed.h>
 #include "hid_indicators.h"
-#include "fonts.h"
+#include <fonts.h>
 #include "util.h"
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
