@@ -160,7 +160,7 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget_peripheral_status_init();
 
 #if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_HID_INDICATORS)
-    zmk_widget_hid_indicators_init(&hid_indicators_widget, canvas);
+    zmk_widget_hid_indicators_init(&hid_indicators_widget, widget->obj);
     lv_obj_align(zmk_widget_hid_indicators_obj(&hid_indicators_widget), LV_ALIGN_TOP_LEFT,
                  CONFIG_NICE_OLED_WIDGET_HID_INDICATORS_CUSTOM_X,
                  CONFIG_NICE_OLED_WIDGET_HID_INDICATORS_CUSTOM_Y);

@@ -95,8 +95,9 @@ static void set_hid_indicators(lv_obj_t *label, struct hid_indicators_state stat
 
 #else
     // HID_HAS_ANIMATION = 0: no art variant selected -> show the lock letters.
-    char buf[4];
+    char buf[8];
     uint8_t n = 0;
+    buf[n++] = 'L';
     if (state.hid_indicators & LED_CLCK) {
         buf[n++] = 'C';
     }
@@ -134,6 +135,8 @@ int zmk_widget_hid_indicators_init(struct zmk_widget_hid_indicators *widget, lv_
     // the same foreground/font the rest of the widgets draw with.
     lv_obj_set_style_text_color(widget->obj, LVGL_FOREGROUND, 0);
     lv_obj_set_style_text_font(widget->obj, &pixel_operator_mono_16, 0);
+    // DEBUG marker: "H" until the first indicator event arrives, then "L"+letters.
+    lv_label_set_text(widget->obj, "H");
 
     sys_slist_append(&widgets, &widget->node);
 
