@@ -89,9 +89,20 @@ static void set_hid_indicators(lv_obj_t *label, struct hid_indicators_state stat
     }
 
 #else
-    // HID_HAS_ANIMATION = 0: No animation enabled
-    // Widget remains functional but displays nothing visually
-    lv_label_set_text(label, "");
+    // HID_HAS_ANIMATION = 0: no art variant selected -> show the lock letters.
+    char buf[4];
+    uint8_t n = 0;
+    if (state.hid_indicators & LED_CLCK) {
+        buf[n++] = 'C';
+    }
+    if (state.hid_indicators & LED_NLCK) {
+        buf[n++] = 'N';
+    }
+    if (state.hid_indicators & LED_SLCK) {
+        buf[n++] = 'S';
+    }
+    buf[n] = '\0';
+    lv_label_set_text(label, buf);
 #endif
 }
 
